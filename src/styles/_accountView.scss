@@ -1,0 +1,39 @@
+#account-view {
+  .card {
+    padding: 40px;
+  }
+
+  form {
+
+    &.unlock-wallet-form,
+    &.sign-in-form {
+
+      label {
+        display: block;
+      } 
+
+      input {
+        text-align: center;
+        width: 50%;
+        display: inline-block;
+      }
+    }
+
+    &.sign-up-form,
+    &.sign-in-form {
+      margin-top: 50px;      
+    }
+  }
+
+  .btn {
+    margin-bottom: 15px;
+  }
+
+  a(:not(.btn)) {
+    color: #007bff;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

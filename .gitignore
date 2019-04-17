@@ -1,0 +1,37 @@
+# See https://help.github.com/ignore-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/build
+
+# docs
+/docs
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+src/**/*.css
+
+*.sublime-project
+*.sublime-workspace
+.idea
+*.iml
+
+.vscode
+
+# NCI does not work with lerna, no need to polute repo with lock file
+package-lock.json

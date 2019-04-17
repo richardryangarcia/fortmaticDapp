@@ -1,0 +1,14 @@
+#view-cause-view {
+  @include content-styling;
+
+  padding-top: 50px;
+
+  .cause-title {
+    margin-bottom: 20px;
+  }
+
+  .card {
+    min-width: 200px;
+    margin-bottom: 1rem;
+  }
+}
