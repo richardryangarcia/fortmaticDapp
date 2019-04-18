@@ -1,9 +1,11 @@
 import Web3 from 'web3';
+import Fortmatic from '../../configs/fortmatic';
 import config from '../../configuration';
 
+const provider = 'Fortmatic';
 let newWeb3;
-
 let enablePromise;
+
 function enable(force = false) {
   if (!force && enablePromise) return enablePromise;
 
@@ -30,18 +32,24 @@ export default () =>
       // wait until complete
     }
     if (!newWeb3) {
-      if (window.ethereum) {
-        newWeb3 = new Web3(window.ethereum);
-        newWeb3.enable = enable.bind(newWeb3);
-        // newWeb3.accountsEnabled = false;
-      } else if (window.web3) {
-        newWeb3 = new Web3(window.web3.currentProvider);
-        newWeb3.enable = newWeb3.eth.getAccounts;
-        newWeb3.accountsEnabled = true;
-      } else {
-        // we provide a fallback so we can generate/read data
-        newWeb3 = new Web3(config.foreignNodeConnection);
-        newWeb3.defaultNode = true;
+      if (provider === 'Metamask') {
+        if (window.ethereum) {
+          newWeb3 = new Web3(window.ethereum);
+          newWeb3.enable = enable.bind(newWeb3);
+        } else {
+          // we provide a fallback so we can generate/read data
+          newWeb3 = new Web3(config.foreignNodeConnection);
+          newWeb3.defaultNode = true;
+        }
+      } else if (provider === 'Fortmatic') {
+        if (Fortmatic) {
+          newWeb3 = new Web3(Fortmatic.getProvider());
+          newWeb3.enable = enable.bind(newWeb3);
+        } else {
+          // we provide a fallback so we can generate/read data
+          newWeb3 = new Web3(config.foreignNodeConnection);
+          newWeb3.defaultNode = true;
+        }
       }
     }
 

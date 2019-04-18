@@ -1,7 +1,6 @@
 import React, { Component, createContext } from 'react';
 import PropTypes from 'prop-types';
 import BigNumber from 'bignumber.js';
-// import w3 from '../configs/web3';
 
 import getWeb3 from '../lib/blockchain/getWeb3';
 import pollEvery from '../lib/pollEvery';
@@ -102,9 +101,7 @@ class Web3Provider extends Component {
   }
 
   componentWillMount() {
-    console.log('about to mount');
     getWeb3().then(web3 => {
-      // console.log(web3.defaultNode)
       this.setState({
         validProvider: !web3.defaultNode,
       });
@@ -121,7 +118,7 @@ class Web3Provider extends Component {
             this.setState({
               account,
               // TODO: find a way for non metamask providers
-              isEnabled: true, // await web3.currentProvider._metamask.isApproved(),
+              isEnabled: await web3.currentProvider._metamask.isApproved(),
             });
           },
           onBalance: balance => {
@@ -223,9 +220,7 @@ class Web3Provider extends Component {
       isEnabled,
       setupTimeout,
     } = this.state;
-    console.log(account);
-    console.log(validProvider);
-    console.log(balance);
+
     return (
       <Provider
         value={{
